@@ -1,0 +1,24 @@
+{
+    "name": "osc-relay-lcs",
+    "main": "index.js",
+    "version": "0.0.1",
+    "description": "OSC relay for LiveCoding.space client",
+    "author": "Nikolay Suslov",
+    "homepage": "http://livecoding.space",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/NikolaySuslov/osc-relay-lcs.git"
+    },
+    "readmeFilename": "README.md",
+    "license": "MIT",
+    "keywords": [
+        "OSC"
+    ],
+    "dependencies": {
+        "osc": "2.2.0",
+        "ws": "3.2.0"
+    },
+    "engines": {
+        "node": ">=0.10.x"
+    }
+}
