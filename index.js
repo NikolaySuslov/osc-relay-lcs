@@ -2,7 +2,15 @@
 //  Bi-Directional OSC messaging Websocket <-> UDP
 //--------------------------------------------------
 var osc = require("osc"),
+    fs = require('fs'),
+    Https = require('https'),
     WebSocket = require("ws");
+
+    const httpsServer = Https.createServer({
+        key: fs.readFileSync('./certs/192.168.0.10.key'),
+        cert: fs.readFileSync('./certs/192.168.0.10.pem')
+      });    
+
 
 var getIPAddresses = function () {
     var os = require("os"),
@@ -43,8 +51,14 @@ udp.on("ready", function () {
 udp.open();
 
 var wss = new WebSocket.Server({
-    port: 8081
+    server: httpsServer
+    //port: 8081
 });
+
+httpsServer.on('request', (req, res) => {
+    res.writeHead(200);
+    res.end('WebSockets through HTTPS\n');
+  });
 
 wss.on("connection", function (socket) {
     console.log("A Web Socket connection has been established!");
@@ -56,3 +70,5 @@ wss.on("connection", function (socket) {
         raw: true
     });
 });
+
+httpsServer.listen(8081);
